@@ -9,27 +9,27 @@ using PawHavenApp.DataAccess.Repositories;
 
 public class InvestmentRepository : AbstractRepository, IInvestmentRepository
 {
-    private readonly DbSet<Investments> dbSet;
+    private readonly DbSet<Investment> dbSet;
 
     public InvestmentRepository(ApplicationDbContext context)
         : base(context)
     {
-        this.dbSet = context.Set<Investments>();
+        this.dbSet = context.Set<Investment>();
     }
 
-    public async Task<int> CreateAsync(Investments entity)
+    public async Task<int> CreateAsync(Investment entity)
     {
         await dbSet.AddAsync(entity);
         await context.SaveChangesAsync();
         return entity.Id;
     }
 
-    public async Task<IEnumerable<Investments>> GetAllAsync()
+    public async Task<IEnumerable<Investment>> GetAllAsync()
     {
         return await dbSet.ToListAsync();
     }
 
-    public async Task<IEnumerable<Investments>> GetAllAsync(int page, int pageSize)
+    public async Task<IEnumerable<Investment>> GetAllAsync(int page, int pageSize)
     {
         return await dbSet
             .Skip((page - 1) * pageSize)
@@ -37,25 +37,25 @@ public class InvestmentRepository : AbstractRepository, IInvestmentRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Investments>> GetAllAsync(Expression<Func<Investments, bool>> predicate)
+    public async Task<IEnumerable<Investment>> GetAllAsync(Expression<Func<Investment, bool>> predicate)
     {
         return await dbSet
             .Where(predicate)
             .ToListAsync();
     }
 
-    public async Task<Investments?> GetByIdAsync(int id)
+    public async Task<Investment?> GetByIdAsync(int id)
     {
         return await dbSet.FindAsync(id);
     }
 
-    public async Task UpdateAsync(Investments entity)
+    public async Task UpdateAsync(Investment entity)
     {
         dbSet.Update(entity);
         await context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Investments entity)
+    public async Task DeleteAsync(Investment entity)
     {
         dbSet.Remove(entity);
         await context.SaveChangesAsync();

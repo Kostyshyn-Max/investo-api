@@ -61,7 +61,7 @@ public class UserRepository : AbstractRepository, IUserRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Guid id)
     {
         var entity = await dbSet.FindAsync(id);
         if (entity != null)

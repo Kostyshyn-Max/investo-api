@@ -29,6 +29,9 @@ public class RealEstate : AbstractEntity<int>
     [Column("price")]
     public int Price { get; set; }
 
+    [Column("area")]
+    public int Area { get; set; }
+
     [Column("publish_date")]
     public DateTime PublishDate { get; set; }
     
